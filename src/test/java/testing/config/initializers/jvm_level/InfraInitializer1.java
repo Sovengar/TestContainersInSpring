@@ -1,4 +1,4 @@
-package testing.config.initializers;
+package testing.config.initializers.jvm_level;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -8,11 +8,14 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 //This initializer will be shared for all test classes.
-public class InfraInitializerWithTestContainers implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class InfraInitializer1 implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:16"));
+    //Static initialization (After JVM, before Spring Test)
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres").withTag("16-alpine"))
+            .withReuse(true); // Ensure that testcontainers.reuse.enable=true is set in ~/.testcontainers.properties
     //static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
+    //Since there is no beforeAll, we do it here
     static {
         //  Startables.deepStart(postgres, kafka).join();
         postgres.start();

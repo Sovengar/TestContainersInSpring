@@ -1,12 +1,12 @@
 package testing.postModel;
 
 import org.junit.jupiter.api.Test;
-import testing.config.initializers.AbstractITInitializer;
+import testing.config.initializers.jvm_level.InfraInitializer2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class PostControllerIT extends AbstractITInitializer {
+class PostControllerIT extends InfraInitializer2 {
 
     @Test
     void connectionEstablished() {

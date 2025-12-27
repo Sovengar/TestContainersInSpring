@@ -1,6 +1,7 @@
 package testing.config.initializers;
 
-import org.springframework.test.context.ContextConfiguration;
+import org.junit.jupiter.api.extension.ExtendWith;
+import testing.config.initializers.jvm_level.InfraInitializer3;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +10,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@ContextConfiguration(initializers = InfraInitializerWithTestContainers.class)
-public @interface UseInfraInitializer {
+@ExtendWith(InfraInitializer3.class)
+public @interface UseInfraInitializer3 {
 }
