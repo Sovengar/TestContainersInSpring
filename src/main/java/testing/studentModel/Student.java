@@ -13,16 +13,10 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table
-class Student {
+public class Student {
     @Id
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            generator = "student_sequence",
-            strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
+    @GeneratedValue(generator = "student_sequence", strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotBlank
     @Column(nullable = false)
