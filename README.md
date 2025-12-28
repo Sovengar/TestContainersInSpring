@@ -272,13 +272,19 @@ String phone = faker.phoneNumber().phoneNumber();
 
 Levanta infraestructura real (Bases de datos, Redis, etc.) en contenedores Docker para los tests de integración.
 
-**Configuración (`TestContainersExamples.java`):**
+**Configuración Avanzada:**
+- **Reutilización (`.withReuse(true)`):** Permite mantener los contenedores vivos entre ejecuciones de tests, acelerando drásticamente el feedback.
+    - Requiere el archivo `%USERPROFILE%/.testcontainers.properties` con `testcontainers.reuse.enable=true`.
+- **Integración con Spring Boot:**
+    - `@ServiceConnection`: Configura automáticamente las propiedades de conexión (JDBC URL, username, password) basándose en el contenedor.
+    - **Uso en Desarrollo:** Puedes usar `@Container` + `@Bean` en una clase de configuración de test para levantar la infraestructura automáticamente al ejecutar la aplicación en modo `dev`.
+
+**Ejemplo (`TestContainersExamples.java`):**
 ```java
 @Container
+@ServiceConnection
 static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
-        .withDatabaseName("testdb")
-        .withUsername("test")
-        .withPassword("test");
+        .withReuse(true);
 ```
 
 **Ventajas:**
