@@ -63,7 +63,7 @@
 		     OPENREWRITE - Automated code refactoring
 		     Config: rewrite.yml
 		     ═══════════════════════════════════════════════════════════════════ -->
-		<rewrite.version>5.24.0</rewrite.version>
+		<rewrite.version>6.26.0</rewrite.version>
 	</properties>
 
 	<dependencies>
@@ -428,7 +428,7 @@
 					<dependency>
 						<groupId>org.openrewrite.recipe</groupId>
 						<artifactId>rewrite-spring</artifactId>
-						<version>5.23.0</version>
+						<version>6.21.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
