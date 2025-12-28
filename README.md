@@ -118,17 +118,34 @@ Versiona el esquema de base de datos de forma programática.
 
 **Ubicación:** `src/main/resources/db/migrations/`
 
-**Convención de nombres:**
-- `V1__create_tables.sql` (inicial)
-- `R__Load_data.sql` (datos repetibles)
+#### 💡 Conceptos Clave de Flyway
 
+1. **`flyway_schema_history`**: Es la tabla que Flyway crea automáticamente en tu base de datos para llevar el control. Guarda el checksum de cada script, quién lo ejecutó y cuándo. Si intentas modificar un script `V` que ya ha sido aplicado, Flyway lanzará un error de validación.
+2. **Convención de Nombres**: Los archivos deben seguir el patrón `<Prefijo><Versión>__<Descripción>.sql`.
+   - **IMPORTANTE**: Se usan **dos guiones bajos (`__`)** para separar la versión de la descripción. Sin ellos, Flyway no reconocerá el archivo.
+3. **Estrategias de Versión (`V`)**:
+   - **Secuencial**: `V1__init.sql`, `V2__add_col.sql`. Ideal para proyectos pequeños o con un solo equipo.
+   - **Timestamp**: `V2024_12_28_2300__add_index.sql`. Muy recomendado en entornos con múltiples desarrolladores para evitar conflictos de números de versión al fusionar ramas.
+4. **Migraciones Repetibles (`R`)**:
+   - No tienen versión fija. Se ejecutan **siempre que su contenido cambie** (el checksum sea distinto).
+   - Ejemplo: `R__Load_data.sql`. Ideal para cargar vistas, procedimientos almacenados o datos maestros que necesitas actualizar frecuentemente.
+5. **Propiedad Custom `flyway.h2-behavior`**:
+   - Es una propiedad casera definida en `FlywayConfig.java`.
+   - Si se establece en `true`, Flyway ejecutará un `clean()` al arrancar la aplicación.
+   - **Propósito**: Imitar el comportamiento de una base de datos H2 (en memoria), donde cada vez que arrancas la aplicación, la base de datos está vacía y se reconstruye desde cero. Muy útil para desarrollo rápido si quieres garantizar un estado limpio sin recrear contenedores.
+
+**Ejemplo de estructura:**
 ```sql
--- V1__create_tables.sql
+-- V1__create_tables.sql (Versionada)
 CREATE TABLE student (
     id BIGINT PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE
 );
+
+-- R__Load_data.sql (Repetible)
+INSERT INTO student (id, name, email) VALUES (1, 'John', 'john@test.com')
+ON CONFLICT (id) DO NOTHING;
 ```
 
 ---
