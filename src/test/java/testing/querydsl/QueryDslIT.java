@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import testing.config.initializers.UseInfraInitializer1;
 import testing.studentModel.Gender;
 import testing.studentModel.Student;
 import testing.studentModel.StudentQueryRepository;
@@ -39,43 +40,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Run: mvn test -Dtest=QueryDslIntegrationTest
  * ═══════════════════════════════════════════════════════════════════════════════
  */
-@SpringBootTest
-@Testcontainers
-@Transactional
-@DisplayName("QueryDSL Repository Integration Tests")
 @ActiveProfiles("test")
 @Tag("integration")
+@SpringBootTest
+@Transactional
+@UseInfraInitializer1
+@DisplayName("QueryDSL Repository Integration Tests")
 class QueryDslIT {
-
-    @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test");
-
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", () -> postgres.getJdbcUrl().replace("jdbc:", "jdbc:p6spy:"));
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
-        registry.add("spring.jpa.hibernate.ddl-auto", () -> "create-drop");
-        registry.add("spring.flyway.enabled", () -> "false");
-    }
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
     private StudentQueryRepository queryRepository;
-    private final Faker faker = new Faker();
-
-    @BeforeEach
-    void setUp() {
-        queryRepository = new StudentQueryRepository(entityManager);
-        studentRepository.deleteAll();
-    }
 
     // ─────────────────────────────────────────────────────────────────────────────
     // BASIC QUERIES
