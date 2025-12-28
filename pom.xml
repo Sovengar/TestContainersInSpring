@@ -402,9 +402,6 @@
 					<excludedClasses>
 						<param>testing.config.*</param>
 					</excludedClasses>
-					<jvmArgs>
-						<jvmArg>--enable-preview</jvmArg>
-					</jvmArgs>
 				</configuration>
 			</plugin>
 
