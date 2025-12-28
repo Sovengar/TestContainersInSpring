@@ -314,7 +314,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>--enable-preview</argLine>
 					<excludedGroups>integration</excludedGroups>
 				</configuration>
 			</plugin>
@@ -334,7 +333,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<argLine>--enable-preview</argLine>
 					<groups>integration</groups>
 					<!-- BEGIN Workaround Docker CLI 29+ -->
 					<!-- Docker 29+ is incompatible with testcontainer 1.x, "client version 1.32 is too old. Minimum supported API version is 1.44, please upgrade your client to a newer version"
