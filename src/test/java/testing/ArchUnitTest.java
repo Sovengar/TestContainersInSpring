@@ -1,4 +1,4 @@
-package testing.architecture;
+package testing;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
@@ -22,7 +22,7 @@ import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.sli
  * Dependency (pom.xml):
  * com.tngtech.archunit:archunit-junit5
  *
- * Run: mvn test -Dtest=ArchitectureTest
+ * Run: mvn test -Dtest=ArchUnitTest
  *
  * These tests validate:
  * - Layer dependencies (controllers → services → repositories)
@@ -33,7 +33,7 @@ import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.sli
  */
 @ActiveProfiles("test")
 @DisplayName("Architecture Tests (ArchUnit)")
-class ArchitectureTest {
+class ArchUnitTest {
 
     private static JavaClasses importedClasses;
 

@@ -6,21 +6,21 @@ Proyecto para probar herramientas utiles.
 
 ## 🛠️ Herramientas Incluidas
 
-| Herramienta       | Propósito               | Ubicación Config                     |
-|-------------------|-------------------------|--------------------------------------|
-| **Jacoco**        | Cobertura de código     | `pom.xml` → plugin                   |
-| **Pitest**        | Mutation testing        | `pom.xml` → plugin                   |
+| Herramienta       | Propósito               | Ubicación Config                    |
+|-------------------|-------------------------|-------------------------------------|
+| **Jacoco**        | Cobertura de código     | `pom.xml` → plugin                  |
+| **Pitest**        | Mutation testing        | `pom.xml` → plugin                  |
 | **Flyway**        | Migraciones de BD       | `FlywayConfig.java`                 |
-| **ArchUnit**      | Tests de arquitectura   | `ArchitectureTest.java`              |
-| **P6Spy**         | Logging SQL             | `src/main/resources/spy.properties`  |
-| **QueryDSL**      | Queries type-safe       | `StudentQueryRepository.java`        |
-| **OpenRewrite**   | Refactoring automático  | `rewrite.yml`                        |
-| **Error Prone**   | Análisis estático       | `pom.xml` → compiler plugin          |
-| **ApprovalTests** | Snapshot testing        | `ApprovalTestsExamples.java`         |
-| **Faker**         | Datos fake para tests   | `pom.xml` → javafaker                |
-| **JSON-Unit**     | Comparación JSON        | `JsonUnitExamplesTest.java`          |
-| **jqwik**         | Property-based tests    | `JqwikExampleTest.java`              |
-| **Testcontainers**| Contenedores para tests | `TestContainersIT.java`              |
+| **ArchUnit**      | Tests de arquitectura   | `ArchUnitTest.java`                 |
+| **P6Spy**         | Logging SQL             | `src/main/resources/spy.properties` |
+| **QueryDSL**      | Queries type-safe       | `StudentQueryRepository.java`       |
+| **OpenRewrite**   | Refactoring automático  | `rewrite.yml`                       |
+| **Error Prone**   | Análisis estático       | `pom.xml` → compiler plugin         |
+| **ApprovalTests** | Snapshot testing        | `ApprovalTestsExamples.java`        |
+| **Faker**         | Datos fake para tests   | `pom.xml` → javafaker               |
+| **JSON-Unit**     | Comparación JSON        | `JsonUnitExamplesTest.java`         |
+| **jqwik**         | Property-based tests    | `JqwikExampleTest.java`             |
+| **Testcontainers**| Contenedores para tests | `TestContainersIT.java`             |
 
 ---
 
@@ -54,7 +54,7 @@ Proyecto para probar herramientas utiles.
 # ═══════════════════════════════════════════════════════════════════
 # EJECUTAR TESTS ESPECÍFICOS
 # ═══════════════════════════════════════════════════════════════════
-./mvnw test -Dtest=ArchitectureTest        # ArchUnit
+./mvnw test -Dtest=ArchUnitTest            # ArchUnit
 ./mvnw test -Dtest=ApprovalTestsExamples   # ApprovalTests
 ./mvnw test -Dtest=JsonUnitExamplesTest    # JSON-Unit
 
@@ -191,7 +191,7 @@ void percentageShouldStayInValidRange(
 
 Valida reglas de arquitectura en tiempo de test.
 
-**Ejemplo (`ArchitectureTest.java`):**
+**Ejemplo (`ArchUnitTest.java`):**
 ```java
 @Test
 void controllersShouldNotAccessRepositoriesDirectly() {
@@ -367,10 +367,9 @@ static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-
 src/
 ├── main/
 │   ├── java/testing/
-│   │   ├── studentModel/
-│   │   │   ├── Student.java
-│   │   │   └── StudentRepository.java
-│   │   └── ...
+│   │   ├── config/
+│   │   │   └── FlywayConfig.java         ← Flyway config
+│   ├── ...
 │   └── resources/
 │       ├── application.properties
 │       ├── spy.properties              ← P6Spy config
@@ -378,19 +377,14 @@ src/
 │           └── V1__create_tables.sql   ← Flyway
 ├── test/
 │   └── java/testing/
+│       └── ArchUnitTest.java           ← ArchUnit
+│       └── JsonUnitExamplesTest.java   ← JSON-Unit
+│       │── QueryDslIT.java             ← QueryDSL (Failsafe)
 │       ├── approvaltests/
 │       │   └── ApprovalTestsExamples.java ← ApprovalTests
-│       ├── architecture/
-│       │   └── ArchitectureTest.java      ← ArchUnit
-│       ├── jsonunit/
-│       │   └── JsonUnitExamplesTest.java  ← JSON-Unit
-│       ├── querydsl/
-│       │   └── QueryDslIT.java             ← QueryDSL (Failsafe)
 │       ├── testcontainers/
-│       │   └── TestContainersIT.java       ← Testcontainers (Failsafe)
-│       └── studentModel/
-│           └── ... (Tests de dominio)
-└── rewrite.yml                          ← OpenRewrite config
+│           └── TestContainersIT.java       ← Testcontainers (Failsafe)
+└── rewrite.yml                             ← OpenRewrite config
 ```
 
 ---

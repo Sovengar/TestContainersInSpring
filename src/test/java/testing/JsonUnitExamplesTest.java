@@ -1,4 +1,4 @@
-package testing.jsonunit;
+package testing;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;

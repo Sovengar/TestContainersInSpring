@@ -211,7 +211,7 @@
 		<!-- ═══════════════════════════════════════════════════════════════════
 		     ARCHUNIT - Architecture testing
 		     Validates architectural rules at test time
-		     Usage: See ArchitectureTest.java
+		     Usage: See ArchUnitTest.java
 		     ═══════════════════════════════════════════════════════════════════ -->
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>

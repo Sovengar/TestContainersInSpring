@@ -1,4 +1,4 @@
-package testing.jqwik;
+package testing;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
