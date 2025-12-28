@@ -19,7 +19,7 @@ Proyecto para probar herramientas utiles.
 | **ApprovalTests** | Snapshot testing        | `ApprovalTestsExamples.java`         |
 | **Faker**         | Datos fake para tests   | `pom.xml` → javafaker                |
 | **JSON-Unit**     | Comparación JSON        | `JsonUnitExamplesTest.java`          |
-| **Testcontainers**| Contenedores para tests | `TestContainersExamples.java`        |
+| **Testcontainers**| Contenedores para tests | `TestContainersIT.java`              |
 
 ---
 
@@ -56,7 +56,12 @@ Proyecto para probar herramientas utiles.
 ./mvnw test -Dtest=ArchitectureTest        # ArchUnit
 ./mvnw test -Dtest=ApprovalTestsExamples   # ApprovalTests
 ./mvnw test -Dtest=JsonUnitExamplesTest    # JSON-Unit
-./mvnw test -Dtest=QueryDslIntegrationTest # QueryDSL
+
+# ═══════════════════════════════════════════════════════════════════
+# INTEGRATION TESTS (FAILSAFE - mvn verify)
+# ═══════════════════════════════════════════════════════════════════
+./mvnw verify -Dit.test=QueryDslIT        # QueryDSL Integration
+./mvnw verify -Dit.test=TestContainersIT   # TestContainers examples
 ```
 
 ---
@@ -270,7 +275,7 @@ String phone = faker.phoneNumber().phoneNumber();
 
 ### 🐳 Testcontainers (Contenedores para Tests)
 
-Levanta infraestructura real (Bases de datos, Redis, etc.) en contenedores Docker para los tests de integración.
+Levanta infraestructura real (Bases de datos, Redis, etc.) en contenedores Docker para los tests de integración (Gestionado por **Maven Failsafe**).
 
 **Configuración Avanzada:**
 - **Reutilización (`.withReuse(true)`):** Permite mantener los contenedores vivos entre ejecuciones de tests, acelerando drásticamente el feedback.
@@ -279,7 +284,7 @@ Levanta infraestructura real (Bases de datos, Redis, etc.) en contenedores Docke
     - `@ServiceConnection`: Configura automáticamente las propiedades de conexión (JDBC URL, username, password) basándose en el contenedor.
     - **Uso en Desarrollo:** Puedes usar `@Container` + `@Bean` en una clase de configuración de test para levantar la infraestructura automáticamente al ejecutar la aplicación en modo `dev`.
 
-**Ejemplo (`TestContainersExamples.java`):**
+**Ejemplo (`TestContainersIT.java`):**
 ```java
 @Container
 @ServiceConnection
@@ -318,9 +323,9 @@ src/
 │       ├── jsonunit/
 │       │   └── JsonUnitExamplesTest.java  ← JSON-Unit
 │       ├── querydsl/
-│       │   └── QueryDslIntegrationTest.java ← QueryDSL
+│       │   └── QueryDslIT.java             ← QueryDSL (Failsafe)
 │       ├── testcontainers/
-│       │   └── TestContainersExamples.java  ← Testcontainers
+│       │   └── TestContainersIT.java       ← Testcontainers (Failsafe)
 │       └── studentModel/
 │           └── ... (Tests de dominio)
 └── rewrite.yml                          ← OpenRewrite config
