@@ -159,7 +159,7 @@ class TestContainersIT {
     }
 
     @ActiveProfiles("test")
-    @SpringBootTest(classes = AppRunner.class)
+    @SpringBootTest
     @Nested
     @Tag("integration")
     class jUnit5Example extends Junit5ITInitializer {
@@ -177,6 +177,7 @@ class TestContainersIT {
     @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
     @Import(PostgresContainerBean.class)
     @Tag("integration")
+    @Nested
     class WeirdExample {
         @Autowired
         private PostgreSQLContainer<?> postgresContainer;
