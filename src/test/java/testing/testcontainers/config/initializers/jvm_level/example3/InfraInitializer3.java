@@ -1,7 +1,7 @@
 package testing.testcontainers.config.initializers.jvm_level.example3;
 
 import org.flywaydb.core.Flyway;
-import testing.config.FlywayConfig;
+import testing.infra.config.FlywayConfig;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.testcontainers.containers.PostgreSQLContainer;

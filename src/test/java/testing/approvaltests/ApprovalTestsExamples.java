@@ -7,8 +7,8 @@ import org.approvaltests.reporters.QuietReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import testing.studentModel.Gender;
-import testing.studentModel.Student;
+import testing.domain.Gender;
+import testing.domain.models.Student;
 
 import java.util.List;
 import java.util.stream.Collectors;

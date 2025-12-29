@@ -17,7 +17,7 @@
 
 -- ─────────────────────────────────────────────────────────────────────────────────
 -- STUDENT TABLE
--- Entity: testing.studentModel.Student
+-- Entity: testing.domain.models.Student
 -- ─────────────────────────────────────────────────────────────────────────────────
 CREATE SEQUENCE IF NOT EXISTS student_sequence START WITH 1 INCREMENT BY 1;
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS student (
 
 -- ─────────────────────────────────────────────────────────────────────────────────
 -- POST TABLE
--- Entity: testing.postModel.Post
+-- Entity: testing.domain.models.Post
 -- ─────────────────────────────────────────────────────────────────────────────────
 CREATE SEQUENCE IF NOT EXISTS post_sequence START WITH 1 INCREMENT BY 1;
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS post (
 
 -- ─────────────────────────────────────────────────────────────────────────────────
 -- STUDENT2 TABLE
--- Entity: testing.student2Model.Student2
+-- Entity: testing.domain.models.Student2
 -- ─────────────────────────────────────────────────────────────────────────────────
 CREATE SEQUENCE IF NOT EXISTS student2_sequence START WITH 1 INCREMENT BY 1;
 

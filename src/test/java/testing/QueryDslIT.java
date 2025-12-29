@@ -10,10 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.transaction.Transactional;
 import testing.testcontainers.config.initializers.UseInfraInitializer1;
-import testing.studentModel.Gender;
-import testing.studentModel.Student;
-import testing.studentModel.StudentQueryRepository;
-import testing.studentModel.StudentRepository;
+import testing.domain.Gender;
+import testing.domain.models.Student;
+import testing.domain.repositories.StudentQueryRepository;
+import testing.domain.repositories.StudentRepository;
 
 import java.util.List;
 

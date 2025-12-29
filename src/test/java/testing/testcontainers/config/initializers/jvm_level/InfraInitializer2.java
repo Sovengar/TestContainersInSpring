@@ -10,7 +10,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
-import testing.config.runners.SystemRunner;
+import testing._config.runners.SystemRunner;
 
 @SpringBootTest
 @SystemRunner

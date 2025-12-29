@@ -1,9 +1,8 @@
 package testing.testcontainers.config.initializers.test_class_level;
 
 import org.flywaydb.core.Flyway;
-import testing.config.FlywayConfig;
+import testing.infra.config.FlywayConfig;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;

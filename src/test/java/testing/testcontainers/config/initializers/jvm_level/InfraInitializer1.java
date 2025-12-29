@@ -1,7 +1,7 @@
 package testing.testcontainers.config.initializers.jvm_level;
 
 import org.flywaydb.core.Flyway;
-import testing.config.FlywayConfig;
+import testing.infra.config.FlywayConfig;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

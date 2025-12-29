@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import testing.testcontainers.config.initializers.UseInfraInitializer1;
-import testing.postModel.PostRepository;
-import testing.studentModel.StudentRepository;
+import testing.domain.repositories.PostRepository;
+import testing.domain.repositories.StudentRepository;
 
 import java.util.Arrays;
 

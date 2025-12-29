@@ -1,7 +1,7 @@
 package testing.testcontainers.config.initializers.test_class_level;
 
 import org.flywaydb.core.Flyway;
-import testing.config.FlywayConfig;
+import testing.infra.config.FlywayConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -10,7 +10,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-import testing.config.runners.DatabaseRunner;
+import testing._config.runners.DatabaseRunner;
 
 @DatabaseRunner
 @DataJpaTest
