@@ -39,6 +39,13 @@ class MockitoShowcaseTest {
         void performAction(String data);
     }
 
+    // Clase de utilidad estática para el ejemplo de mocking estático
+    static class StaticUtils {
+        static String staticMethod(String input) {
+            return "Real: " + input;
+        }
+    }
+
     @Nested
     @DisplayName("1. Basic Stubbing & Dynamic Stubs")
     class Stubbing {
@@ -196,6 +203,31 @@ class MockitoShowcaseTest {
             // Then (Antiguamente verify)
             assertThat(result).isEqualTo("BDD Value");
             then(externalService).should().fetchData("bdd");
+        }
+    }
+
+    @Nested
+    @DisplayName("5. Static Mocking")
+    class StaticMocking {
+
+        @Test
+        @DisplayName("Mocking métodos estáticos con try-with-resources")
+        void staticMockExample() {
+            // El mock estático DEBE cerrarse para no contaminar otros tests,
+            // por eso es obligatorio el uso de try-with-resources.
+            try (MockedStatic<StaticUtils> mockedStatic = mockStatic(StaticUtils.class)) {
+
+                mockedStatic.when(() -> StaticUtils.staticMethod("hi"))
+                        .thenReturn("Mocked Hi!");
+
+                assertThat(StaticUtils.staticMethod("hi")).isEqualTo("Mocked Hi!");
+
+                // Verificación del mock estático
+                mockedStatic.verify(() -> StaticUtils.staticMethod("hi"));
+            }
+
+            // Fuera del try-with-resources, el método vuelve a su comportamiento original
+            assertThat(StaticUtils.staticMethod("hi")).isEqualTo("Real: hi");
         }
     }
 }
