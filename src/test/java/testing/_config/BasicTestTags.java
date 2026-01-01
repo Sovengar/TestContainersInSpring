@@ -2,6 +2,7 @@ package testing._config;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.springframework.test.context.ActiveProfiles;
+import testing._utils.PrettyTestNames;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

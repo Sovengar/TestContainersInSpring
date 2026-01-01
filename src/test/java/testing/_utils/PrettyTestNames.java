@@ -1,4 +1,4 @@
-package testing._config;
+package testing._utils;
 
 import org.junit.jupiter.api.DisplayNameGenerator;
 
