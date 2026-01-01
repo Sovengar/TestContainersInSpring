@@ -1,4 +1,4 @@
-package testing.awaitility;
+package testing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

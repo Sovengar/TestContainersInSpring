@@ -1,4 +1,4 @@
-package testing.cucumber.steps;
+package testing.cucumber;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class CucumberSpringConfiguration {
 
     @Configuration
+    @org.springframework.context.annotation.ComponentScan("testing.cucumber")
     @EnableAutoConfiguration(exclude = {
             DataSourceAutoConfiguration.class,
             HibernateJpaAutoConfiguration.class
