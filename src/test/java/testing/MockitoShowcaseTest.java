@@ -230,4 +230,44 @@ class MockitoShowcaseTest {
             assertThat(StaticUtils.staticMethod("hi")).isEqualTo("Real: hi");
         }
     }
+
+    @Nested
+    @DisplayName("6. Deep Stubs (RETURNS_DEEP_STUBS)")
+    class DeepStubs {
+
+        @Test
+        @DisplayName("Deep stubs para mockear cadenas de llamadas (Nested objects)")
+        void deepStubsExample() {
+            // RETURNS_DEEP_STUBS permite mockear una cadena de llamadas (ej:
+            // a.getB().getC().doSomething())
+            // sin tener que mockear cada objeto intermedio manualmente.
+
+            // ADVERTENCIA: Su uso suele indicar un diseño pobre y violación de la Ley de
+            // Demeter.
+            // Es útil principalmente para trabajar con código legado difícil de
+            // refactorizar.
+
+            ComplexService complexService = mock(ComplexService.class, RETURNS_DEEP_STUBS);
+
+            // Stubbing de la cadena completa
+            when(complexService.getDeepLevel().getNestedData().getValue())
+                    .thenReturn("Deep Value Found!");
+
+            // Verificación
+            assertThat(complexService.getDeepLevel().getNestedData().getValue())
+                    .isEqualTo("Deep Value Found!");
+        }
+
+        interface ComplexService {
+            DeepLevel getDeepLevel();
+        }
+
+        interface DeepLevel {
+            NestedData getNestedData();
+        }
+
+        interface NestedData {
+            String getValue();
+        }
+    }
 }

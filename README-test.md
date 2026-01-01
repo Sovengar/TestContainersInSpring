@@ -272,6 +272,11 @@ Herramienta esencial para aislar el código bajo test mediante la creación de o
 8.  **BDDMockito (`given...willReturn`)**: Estilo sintáctico alineado con BDD (Behavior Driven Development) para mejorar la legibilidad.
 9.  **Static Mocking (`mockStatic`)**: Permite mockear métodos estáticos. **Es obligatorio** usar `try-with-resources` para asegurar que el mock se cierra y no afecta a otros tests.
 
+10. **Deep Stubs (`RETURNS_DEEP_STUBS`)**: Permite mockear cadenas de llamadas (ej: `service.getA().getB().getC()`) de forma automática sin tener que configurar cada mock intermedio.
+
+> [!CAUTION]
+> **Deep Stubs y la Ley de Demeter**: El uso de Deep Stubs suele ser síntoma de un diseño pobre (alto acoplamiento). Se recomienda usarlos solo en código legado difícil de refactorizar. En código nuevo, es preferible seguir la premisa: *"Don't mock what you don't own"* y *"Avoid train wrecks"*.
+
 **Ejemplo de Verificación y Captura:**
 ```java
 // Capturar un argumento para inspeccionarlo
