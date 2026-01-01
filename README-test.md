@@ -307,6 +307,17 @@ Permite simular servicios HTTP externos (APIs de terceros, microservicios) para 
 3.  **Fault Injection**: Simula fallos de red (conexiones cerradas, respuestas lentas, datos corruptos) para probar la resiliencia de la APP.
 4.  **Response Templating**: Genera respuestas basadas en los datos de la petición (ej. devolver el mismo ID enviado).
 
+#### 🧪 ¿Por qué para Tests de Integración?
+WireMock es ideal para **tests sociales/integración** porque permite probar cómo nuestra aplicación reacciona ante respuestas reales (o errores) de un sistema externo sin necesidad de que ese sistema esté levantado o configurado. Aísla nuestra lógica de red y de parsing de la infraestructura real.
+
+> [!WARNING]
+> **WireMock NO es una herramienta de Contract Testing.**
+
+#### ❓ ¿Por qué no sirve para Contract Testing?
+Aunque WireMock puede simular una API, tiene un problema fundamental de **"Split Brain" (Cerebro Dividido)**:
+*   **Falsos Positivos**: Tú defines en tu test qué debe devolver el mock (ej. un JSON con `name`). Si el proveedor real cambia el campo a `fullName`, tus tests con WireMock seguirán pasando (porque el mock sigue devolviendo `name`), pero tu aplicación fallará en producción.
+*   **Falta de Validación del Proveedor**: WireMock no garantiza que la definición del mock coincida con la realidad del contrato del proveedor. Para asegurar el contrato, se deben usar herramientas como **Pact** o **Spring Cloud Contract**, donde el contrato es compartido y validado por ambas partes.
+
 ---
 
 ### 🧪 REST Assured (Testing de APIs HTTP)
