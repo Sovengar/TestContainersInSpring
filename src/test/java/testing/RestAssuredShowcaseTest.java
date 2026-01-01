@@ -1,4 +1,4 @@
-package testing.rest;
+package testing;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
