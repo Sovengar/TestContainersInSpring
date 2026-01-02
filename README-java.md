@@ -13,6 +13,7 @@ Herramientas para el desarrollo, infraestructura y refactorización automática.
 | **OpenRewrite** | Refactoring automático | `rewrite.yml`                       |
 | **Error Prone** | Análisis estático      | `pom.xml` → compiler plugin         |
 | **Lombok**      | Reducción Boilerplate  | `LombokShowcaseTest.java`           |
+| **Swagger**     | Documentación de API   | `SwaggerShowcaseController.java`    |
 
 ---
 
@@ -188,3 +189,31 @@ Price price = new Price(10.0).withAmount(20.0);
 - **Consistency**: El código generado siempre sigue el estándar definido.
 - **Wither pattern**: Facilita enormemente trabajar con inmutabilidad.
 - **Logging**: `@Slf4j` inyecta automáticamente un logger privado y estático.
+
+---
+
+### 📝 Swagger / OpenAPI (Documentación de API)
+
+**Concepto**: Generación automática de documentación interactiva para APIs REST. Permite visualizar y probar los endpoints directamente desde el navegador.
+
+**URL**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+**Uso Recomendado**: Siempre que se expongan servicios REST para facilitar la integración con el frontend u otros equipos.
+
+**Ejemplo (`SwaggerShowcaseController.java`):**
+```java
+@Tag(name = "Showcase", description = "Endpoints de ejemplo")
+@RestController
+public class ShowcaseController {
+
+    @Operation(summary = "Obtener item", description = "Retorna un item por su ID")
+    @GetMapping("/{id}")
+    public Item getById(@PathVariable UUID id) { ... }
+}
+```
+
+**Ventajas clave:**
+- **Auto-generado**: La documentación siempre está sincronizada con el código.
+- **Interactivo**: Interfaz amigable para realizar pruebas sin herramientas externas.
+- **Estandarizado**: Basado en la especificación OpenAPI 3.0.
+- **Schemas**: Documentación detallada de los modelos de datos (DTOs).

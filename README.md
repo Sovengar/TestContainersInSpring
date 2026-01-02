@@ -10,7 +10,7 @@ La documentación se ha dividido en secciones para facilitar su lectura:
     Guía completa de herramientas de testing: JUnit 5, Mockito, Cucumber, Selenium, Testcontainers, jqwik, Pitest y más.
 
 2.  ### ☕ [Java & Infrastructure](README-java.md)
-    Herramientas de desarrollo y persistencia: Flyway, QueryDSL, P6Spy, Docker Compose, OpenRewrite y Lombok.
+    Herramientas de desarrollo y persistencia: Flyway, QueryDSL, P6Spy, Docker Compose, OpenRewrite, Lombok y Swagger.
 
 ---
 
