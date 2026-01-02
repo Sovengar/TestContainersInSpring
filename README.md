@@ -117,6 +117,7 @@ graph TD
 ./mvnw test -Dtest=CucumberShowcaseTest
 ./mvnw test -Dtest=SeleniumShowcaseTest
 ./mvnw test -Dtest=AwaitilityShowcaseTest
+./mvnw test -Dtest=InstancioShowcaseTest
 ./mvnw test -Dtest=TennisScoreParameterizedTest,TennisScoreTest
 
 # ═══════════════════════════════════════════════════════════════════

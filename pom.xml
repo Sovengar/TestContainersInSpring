@@ -70,6 +70,7 @@
 		<selenium.version>4.27.0</selenium.version>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
 		<awaitility.version>4.2.2</awaitility.version>
+		<instancio.version>5.5.1</instancio.version>
 	</properties>
 
 	<dependencyManagement>
@@ -352,6 +353,18 @@
 			<groupId>org.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
 			<version>${awaitility.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- ═══════════════════════════════════════════════════════════════════
+		     INSTANCIO - Data generation for tests
+		     Automates creation of complex POJOs with random data.
+		     Usage: See InstancioShowcaseTest.java
+		     ═══════════════════════════════════════════════════════════════════ -->
+		<dependency>
+			<groupId>org.instancio</groupId>
+			<artifactId>instancio-junit</artifactId>
+			<version>${instancio.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

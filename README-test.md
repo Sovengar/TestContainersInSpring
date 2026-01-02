@@ -23,6 +23,7 @@ Proyecto para demostrar el uso de diversas herramientas de testing y aseguramien
 | **Cucumber**       | BDD (Gherkin)           | `CucumberShowcaseTest.java`    |
 | **Selenium**       | E2E Testing (Browser)   | `SeleniumShowcaseTest.java`    |
 | **Awaitility**     | Testing asíncrono       | `AwaitilityShowcaseTest.java`  |
+| **Instancio**      | Generación de datos     | `InstancioShowcaseTest.java`   |
 
 ---
 
@@ -92,6 +93,18 @@ Alternativa superior a `Thread.sleep()` que usa **polling** dinámico.
 1. **⏱️ Determinismo**: No espera un tiempo fijo. Si la condición se cumple en 10ms, el test sigue inmediatamente.
 2. **🛡️ Robustez**: Permite configurar *timeouts* claros y re-evaluaciones automáticas (*polling interval*).
 3. **📖 Semántica**: Describe **qué** esperas, no **cuánto** tiempo duerme el hilo.
+
+---
+
+### 🎲 Instancio (Generación de Objetos)
+Crea grafos de objetos complejos con datos aleatorios de forma automática.
+[InstancioShowcaseTest.java](file:///c:/Users/buble/OneDrive/DEV/Projects/Infra/useful-tools/src/test/java/testing/InstancioShowcaseTest.java)
+
+#### ❓ ¿Por qué usar Instancio?
+1. **🚀 Productividad**: No pierdas tiempo rellenando constructores o setters con datos "paja".
+2. **🧪 Robustez**: Genera datos aleatorios en cada ejecución, ayudando a encontrar bugs que con datos fijos no verías.
+3. **🛠️ Flexibilidad**: Permite personalizar campos específicos, ignorar otros o definir modelos reutilizables.
+
 
 ---
 
@@ -426,3 +439,34 @@ void fileTest(FileTestCase testCase) {
 ```
 
 ---
+
+### 🎲 Instancio (Generación de Datos)
+
+**Concepto**: Biblioteca para crear grafos de objetos complejos (POJOs, Records, Collections) con datos aleatorios. Ideal para tests donde la estructura del objeto es importante pero el valor exacto de la mayoría de los campos no lo es.
+
+**Uso Recomendado**: Reducir el boilerplate en la preparación de datos (Arrange) y evitar el uso de datos fivos que oculten bugs.
+
+**Ejemplo (`InstancioShowcaseTest.java`):**
+```java
+// Creación básica
+User user = Instancio.create(User.class);
+
+// Personalización y selección
+User customer = Instancio.of(User.class)
+    .set(field(User::role), Role.CUSTOMER)
+    .generate(field(User::email), gen -> gen.net().email())
+    .create();
+
+// Modelos reutilizables
+Model<User> adminModel = Instancio.of(User.class)
+    .set(field(User::role), Role.ADMIN)
+    .toModel();
+
+User admin = Instancio.create(adminModel);
+```
+
+**Ventajas clave:**
+- **Soporte total para Records**: Funciona perfectamente con tipos inmutables de Java moderno.
+- **Selectores potentes**: Permite apuntar a campos específicos o a todos los campos de un tipo.
+- **Integración con JUnit 5**: Extension `@ExtendWith(InstancioExtension.class)` para inyección de configuraciones.
+- **Bean Validation**: Puede generar datos que cumplan con anotaciones `@NotNull`, `@Size`, etc.
