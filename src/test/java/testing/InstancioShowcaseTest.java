@@ -1,5 +1,6 @@
 package testing;
 
+import lombok.With;
 import org.instancio.Instancio;
 import org.instancio.Model;
 import org.instancio.TypeToken;
@@ -171,6 +172,31 @@ class InstancioShowcaseTest {
 
             assertThat(user.name()).isNull();
             assertThat(user.address().city()).isNull();
+        }
+    }
+
+    @Nested
+    @DisplayName("6. Fusion: Instancio + Lombok @With")
+    class FusionExample {
+
+        // Los records de Java son geniales, pero a veces queremos cambiar solo un campo
+        // de un objeto ya generado. Lombok @With lo soluciona.
+        @With
+        record Product(UUID id, String name, double price, String category) {
+        }
+
+        @Test
+        @DisplayName("Generar con Instancio y modificar con Lombok @With")
+        void instancioWithLombokWither() {
+            // 1. Generamos un producto totalmente aleatorio
+            Product randomProduct = Instancio.create(Product.class);
+
+            // 2. Creamos una copia exacta pero con el precio modificado usando @With
+            Product promoProduct = randomProduct.withPrice(0.99);
+
+            assertThat(promoProduct.id()).isEqualTo(randomProduct.id());
+            assertThat(promoProduct.name()).isEqualTo(randomProduct.name());
+            assertThat(promoProduct.price()).isEqualTo(0.99);
         }
     }
 }

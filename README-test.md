@@ -98,12 +98,15 @@ Alternativa superior a `Thread.sleep()` que usa **polling** dinámico.
 
 ### 🎲 Instancio (Generación de Objetos)
 Crea grafos de objetos complejos con datos aleatorios de forma automática.
-[InstancioShowcaseTest.java](file:///c:/Users/buble/OneDrive/DEV/Projects/Infra/useful-tools/src/test/java/testing/InstancioShowcaseTest.java)
+[InstancioShowcaseTest.java](file:///c:/Users/buble/OneDrive/DEV/Projects/Infra\useful-tools/src/test/java/testing/InstancioShowcaseTest.java)
 
 #### ❓ ¿Por qué usar Instancio?
 1. **🚀 Productividad**: No pierdas tiempo rellenando constructores o setters con datos "paja".
 2. **🧪 Robustez**: Genera datos aleatorios en cada ejecución, ayudando a encontrar bugs que con datos fijos no verías.
 3. **🛠️ Flexibilidad**: Permite personalizar campos específicos, ignorar otros o definir modelos reutilizables.
+
+---
+
 
 
 ---
@@ -470,3 +473,16 @@ User admin = Instancio.create(adminModel);
 - **Selectores potentes**: Permite apuntar a campos específicos o a todos los campos de un tipo.
 - **Integración con JUnit 5**: Extension `@ExtendWith(InstancioExtension.class)` para inyección de configuraciones.
 - **Bean Validation**: Puede generar datos que cumplan con anotaciones `@NotNull`, `@Size`, etc.
+
+#### ⚡ Fusión: Instancio + Lombok `@With`
+Los records de Java son geniales por ser inmutables, pero a veces queremos una copia con un solo campo cambiado. Lombok `@With` es el compañero perfecto para Instancio:
+
+```java
+// 1. Generamos un producto aleatorio
+Product product = Instancio.create(Product.class);
+
+// 2. Modificamos solo lo que nos interesa para el test
+Product promo = product.withPrice(0.99);
+```
+
+---

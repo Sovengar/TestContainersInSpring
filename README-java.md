@@ -12,6 +12,7 @@ Herramientas para el desarrollo, infraestructura y refactorización automática.
 | **QueryDSL**    | Queries type-safe      | `StudentQueryRepository.java`       |
 | **OpenRewrite** | Refactoring automático | `rewrite.yml`                       |
 | **Error Prone** | Análisis estático      | `pom.xml` → compiler plugin         |
+| **Lombok**      | Reducción Boilerplate  | `LombokShowcaseTest.java`           |
 
 ---
 
@@ -23,7 +24,7 @@ Versiona el esquema de base de datos de forma programática.
 
 **Configuración (`FlywayConfig.java`):**
 - Gestiona localizaciones dinámicamente (`db/migrations` y `db/dev` en perfil `dev`).
-- Ejecuta `migrate()` automáticamente solo en perfil `dev`.
+- Ejecuta `migrate()` automáticamente solo en perfil `dev`).
 - Permite comportamiento flexible para H2/Tests mediante `flyway.h2-behavior`.
 
 **Ubicación:** `src/main/resources/db/migrations/`
@@ -155,3 +156,35 @@ Detecta errores comunes (Null pointers, comparaciones incorrectas) en tiempo de 
 - Null pointer dereferences
 - Comparaciones incorrectas
 - Uso incorrecto de APIs
+
+---
+
+### 🌶️ Lombok (Reducción de Boilerplate)
+
+**Concepto**: Biblioteca que se integra con el compilador para generar automáticamente código repetitivo (Getters, Setters, Builders, etc.) mediante anotaciones.
+
+**Uso Recomendado**: Siempre que se usen clases POJO/DTOs tradicionales o para añadir funcionalidades extra a Records (como `@With`).
+
+**Ejemplo (`LombokShowcaseTest.java`):**
+```java
+@Data @Builder
+class User {
+    private String name;
+}
+
+// Builder fluido
+User user = User.builder().name("John").build();
+
+// Inmutabilidad (Wither Pattern)
+@Value @With
+class Price {
+    double amount;
+}
+Price price = new Price(10.0).withAmount(20.0);
+```
+
+**Ventajas clave:**
+- **Cleaner code**: Enfócate en la importancia del dominio, no en el ruido técnico.
+- **Consistency**: El código generado siempre sigue el estándar definido.
+- **Wither pattern**: Facilita enormemente trabajar con inmutabilidad.
+- **Logging**: `@Slf4j` inyecta automáticamente un logger privado y estático.
